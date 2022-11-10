@@ -59,7 +59,7 @@ class AP_MSP;
 #define PARAM_INDEX(key, idx, group) (uint32_t(uint32_t(key) << 23 | uint32_t(idx) << 18 | uint32_t(group)))
 #define PARAM_TOKEN_INDEX(token) PARAM_INDEX(AP_Param::get_persistent_key(token.key), token.idx, token.group_element)
 
-#define AP_OSD_NUM_SYMBOLS 91
+#define AP_OSD_NUM_SYMBOLS 93
 /*
   class to hold one setting
  */
@@ -215,6 +215,7 @@ private:
     AP_OSD_Setting hgt_abvterr{false, 23, 7};
     AP_OSD_Setting fence{false, 14, 9};
     AP_OSD_Setting rngf{false, 0, 0};
+    AP_OSD_Setting osd_telemetry{false, 0, 0};
 #if HAL_PLUSCODE_ENABLE
     AP_OSD_Setting pluscode{false, 0, 0};
 #endif
@@ -301,7 +302,8 @@ private:
     void draw_fence(uint8_t x, uint8_t y);
 #endif
     void draw_rngf(uint8_t x, uint8_t y);
-
+    void draw_osd_telemetry(uint8_t x, uint8_t y);
+    uint16_t osdAATTelemetry_CRC(uint8_t data, uint16_t crcAccum);
     struct {
         bool load_attempted;
         const char *str;
