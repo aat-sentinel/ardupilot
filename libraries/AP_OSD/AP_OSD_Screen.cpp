@@ -2203,7 +2203,7 @@ void AP_OSD_Screen::draw_osd_telemetry(uint8_t x, uint8_t y)
             const Location &home_loc = ahrs.get_home();
             float distanceToHome = home_loc.get_distance(loc);
             
-            if (distance_to_home > 5.0f) {
+            if (distanceToHome > 5.0f) {
                 trk_bearing = wrap_360_cd(loc.get_bearing_to(home_loc));
                 trk_bearing += 36000 + 18000;
                 trk_bearing %= 36000;
@@ -2211,7 +2211,7 @@ void AP_OSD_Screen::draw_osd_telemetry(uint8_t x, uint8_t y)
                 float alt;
                 ahrs.get_relative_position_D_home(alt); // ahrs.get_relative_position_D_home(alt) = meters
                 alt = -alt; // must be negative
-                float at = atan2F(alt, distance_to_home);
+                float at = atan2F(alt, distanceToHome);
                 trk_elevation = (float)at * 57.2957795; // 57.2957795 = 1 rad
                 trk_elevation += 37; // because elevation in telemetry should be from -37 to 90
                
